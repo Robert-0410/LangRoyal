@@ -1,6 +1,6 @@
 #!/usr/bin/env wsapi.cgi
 
-local orbit = require "orbit"
+local orbit = require("orbit")
 
 -- Orbit applications are usually modules,
 -- orbit.new does the necessary initialization
@@ -15,11 +15,17 @@ module("hello", package.seeall, orbit.new)
 -- function
 
 function index(web)
-  return render_index()
+	print("index() ran")
+	return render_index()
 end
 
 function say(web, name)
+  print("say() ran")
   return render_say(web, name)
+end
+
+local function testing(web)
+  print("testing() ran"")
 end
 
 -- Builds the application's dispatch table, you can
@@ -28,6 +34,7 @@ end
 
 hello:dispatch_get(index, "/", "/index")
 hello:dispatch_get(say, "/say/(%a+)")
+hello:dispatch_get(testing, "/testing")
 
 -- These are the view functions referenced by the controllers.
 -- orbit.htmlify does through the functions in the table passed
@@ -45,23 +52,22 @@ hello:dispatch_get(say, "/say/(%a+)")
 -- This is a convenience function for the common parts of a page
 
 function render_layout(inner_html)
-   return html{
-     head{ title"Hello" },
-     body{ inner_html }
-   }
+	return html({
+		head({ title("Hello") }),
+		body({ inner_html }),
+	})
 end
 
 function render_hello()
-   return p.hello"Hello World!"
+	return p.hello("Hello World!")
 end
 
 function render_index()
-   return render_layout(render_hello())
+	return render_layout(render_hello())
 end
 
 function render_say(web, name)
-   return render_layout(render_hello() .. 
-     p.hello((web.input.greeting or "Hello ") .. name .. "!"))
+	return render_layout(render_hello() .. p.hello((web.input.greeting or "Hello ") .. name .. "!"))
 end
 
 orbit.htmlify(hello, "render_.+")
