@@ -23,17 +23,20 @@ local function render_index()
 end
 
 local function index(web)
-	print("index() ran")
 	return render_index()
 end
 
-local data = {
-	num1 = 3,
-	num2 = 30,
-	addition = 33,
-}
 local function perform()
-	print("perform() ran")
+	local a = math.random(10000)
+	local b = math.random(1, 10000)
+	local data = {
+		num1 = a,
+		num2 = b,
+		addition = a + b,
+		subtraction = a - b,
+		multiplication = a * b,
+		division = a / b,
+	}
 	return cjson.encode(data)
 end
 
