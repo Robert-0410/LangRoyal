@@ -15,17 +15,11 @@ module("hello", package.seeall, orbit.new)
 -- function
 
 function index(web)
-	print("index() ran")
 	return render_index()
 end
 
 function say(web, name)
-  print("say() ran")
-  return render_say(web, name)
-end
-
-local function testing(web)
-  print("testing() ran"")
+	return render_say(web, name)
 end
 
 -- Builds the application's dispatch table, you can
@@ -34,7 +28,6 @@ end
 
 hello:dispatch_get(index, "/", "/index")
 hello:dispatch_get(say, "/say/(%a+)")
-hello:dispatch_get(testing, "/testing")
 
 -- These are the view functions referenced by the controllers.
 -- orbit.htmlify does through the functions in the table passed
