@@ -1,4 +1,7 @@
+#!/usr/bin/env wsapi.cgi
+
 local orbit = require("orbit")
+local cjson = require("cjson")
 
 module("app", package.seeall, orbit.new)
 
@@ -24,6 +27,17 @@ local function index(web)
 	return render_index()
 end
 
+local data = {
+	num1 = 3,
+	num2 = 30,
+	addition = 33,
+}
+local function perform()
+	print("perform() ran")
+	return cjson.encode(data)
+end
+
 app:dispatch_get(index, "/", "/index")
+app:dispatch_get(perform, "/perform")
 
 orbit.htmlify(app, "render_.+")
