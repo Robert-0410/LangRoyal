@@ -8,7 +8,7 @@ module("app", package.seeall, orbit.new)
 -- [[ not sure why cut these have to be global, at this time I don't know why.
 function render_layout(inner_html)
 	return html({
-		head({ title("Hello") }),
+		head({ title("With Lua and Orbit") }),
 		body({ inner_html }),
 	})
 end
@@ -26,7 +26,7 @@ local function index(web)
 	return render_index()
 end
 
-local function perform()
+local function perform(web)
 	local a = math.random(10000)
 	local b = math.random(1, 10000)
 	local data = {
