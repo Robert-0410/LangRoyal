@@ -112,6 +112,20 @@ function stats.standardDeviation(t)
 	return result
 end
 
+function stats.maxmin(t)
+	local max = -math.huge
+	local min = math.huge
+
+	for k, v in pairs(t) do
+		if type(v) == "number" then
+			max = math.max(max, v)
+			min = math.min(min, v)
+		end
+	end
+
+	return max, min
+end
+
 io.write("Mean:", tab, stats.mean(data), "s", endline)
 io.write("SD:", tab, stats.standardDeviation(data), "s", endline)
 
@@ -121,6 +135,10 @@ for _, n in ipairs(modes) do
 end
 
 io.write("Median:", tab, stats.median(data), "s", endline)
+
+local max, min = stats.maxmin(data)
+io.write("Max:", tab, max, "s", endline)
+io.write("Min:", tab, min, "s", endline)
 
 io.write(endline)
 io.close(output)
