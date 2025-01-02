@@ -1,4 +1,5 @@
 local endline = "\n"
+local tab = "\t"
 local input = io.open("orbit/output.log", "r")
 io.input(input)
 
@@ -23,7 +24,6 @@ io.close(input)
 io.write("Data Size: ", #data, endline)
 
 -- TODO: This Stats stuff could be a module.
--- TODO: need ro calculate the info: average, SD...
 local stats = {}
 function stats.mean(t)
 	local sum = 0
@@ -67,12 +67,37 @@ function stats.mode(t)
 	return temp
 end
 
-io.write("Mean: ", stats.mean(data), "s", endline)
+function stats.median(t)
+	local temp = {}
+
+	-- deep copy table so that when we sort it, the original is unchanged
+	-- also weed out any non numbers
+	for k, v in pairs(t) do
+		if type(v) == "number" then
+			table.insert(temp, v)
+		end
+	end
+
+	table.sort(temp)
+
+	-- If we have an even number of table elements or odd.
+	if math.fmod(#temp, 2) == 0 then
+		-- return mean value of middle two elements
+		return (temp[#temp / 2] + temp[(#temp / 2) + 1]) / 2
+	else
+		-- return middle element
+		return temp[math.ceil(#temp / 2)]
+	end
+end
+
+io.write("Mean:", tab, stats.mean(data), "s", endline)
 
 local modes = stats.mode(data)
 for _, n in ipairs(modes) do
-	io.write("Mode: ", n, "s", endline)
+	io.write("Mode:", tab, n, "s", endline)
 end
+
+io.write("Median:", tab, stats.median(data), "s", endline)
 
 io.write(endline)
 io.close(output)
