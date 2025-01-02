@@ -90,7 +90,30 @@ function stats.median(t)
 	end
 end
 
+function stats.standardDeviation(t)
+	local m
+	local vm
+	local sum = 0
+	local count = 0
+	local result
+
+	m = stats.mean(t)
+
+	for k, v in pairs(t) do
+		if type(v) == "number" then
+			vm = v - m
+			sum = sum + (vm * vm)
+			count = count + 1
+		end
+	end
+
+	result = math.sqrt(sum / (count - 1))
+
+	return result
+end
+
 io.write("Mean:", tab, stats.mean(data), "s", endline)
+io.write("SD:", tab, stats.standardDeviation(data), "s", endline)
 
 local modes = stats.mode(data)
 for _, n in ipairs(modes) do
