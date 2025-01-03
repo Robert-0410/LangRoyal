@@ -24,6 +24,7 @@ io.close(input)
 io.write("Data Size: ", #data, endline)
 
 -- TODO: This Stats stuff could be a module.
+-- TODO: credit blog for these funs
 local stats = {}
 function stats.mean(t)
 	local sum = 0
