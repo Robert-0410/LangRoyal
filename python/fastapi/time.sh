@@ -7,5 +7,5 @@ for i in {1..1000};\
 			-s\
 			-w "%{time_total}\n"\
 			-o /dev/null\
-			http://localhost:8080/perform >> output.log;\
+			http://localhost:8000/perform >> output.log;\
 		done
