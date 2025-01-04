@@ -11,7 +11,7 @@ local output = io.open("output.log", "a")
 io.output(output)
 io.write(timestamp, endline)
 
--- TODO: Harvest data
+-- Harvest data
 local data = {}
 for line in io.lines() do
 	-- TODO: detect timestamps, we can process more data and associate the time
