@@ -1,6 +1,6 @@
 
 from typing import List
-from math import sqrt
+from math import sqrt, ceil
 
 tab = "\t"
 end = "\n"
@@ -59,7 +59,22 @@ def mode(data: List[float]) -> List[float]:
             output.append(v)
     return output
 
-# TODO: Median
+def median(data: List[float]) -> float:
+    values = list[float]()
+    # Deep copy table so that when we sort it, the original is unchanged
+    # Also weed out any non numbers
+    for v in data:
+        if type(v) == float:
+            values.append(v)
+
+    values.sort()
+
+    size = len(values)
+    if size % 2 == 0:
+        return (values[int(size / 2)] + values[int((size / 2) + 1)]) / 2
+    else:
+        return values[ceil(size / 2)]
+
 # TODO: Max
 # TODO: Min
 
@@ -69,6 +84,7 @@ output.write(f"SD:{tab}{sd(data)}{end}")
 modes = mode(data)
 for m in modes:
     output.write(f"Mode:{tab}{m}{end}")
+output.write(f"Median:{tab}{median(data)}{end}")
 
 output.close()
 
