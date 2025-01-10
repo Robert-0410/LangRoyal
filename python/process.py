@@ -42,6 +42,7 @@ def sd(data: List[float]) -> float:
             count = count + 1
     return sqrt(sum / (count -1))
 
+# TODO: after comparing the results using the same data entry only this function gave a different value.
 def mode(data: List[float]) -> List[float]:
     counts = {}
     for v in data:
