@@ -1,6 +1,6 @@
 
 from typing import List
-from math import sqrt, ceil
+from math import sqrt, ceil, modf
 
 tab = "\t"
 end = "\n"
@@ -70,13 +70,14 @@ def median(data: List[float]) -> float:
     values.sort()
 
     size = len(values)
+    # TODO: USE modf
     if size % 2 == 0:
         return (values[int(size / 2)] + values[int((size / 2) + 1)]) / 2
     else:
         return values[ceil(size / 2)]
 
-# TODO: Max
-# TODO: Min
+def maxmin(data: List[float]):
+    return max(data), min(data)
 
 output.write(f"Mean:{tab}{mean(data)}{end}")
 output.write(f"SD:{tab}{sd(data)}{end}")
@@ -84,7 +85,12 @@ output.write(f"SD:{tab}{sd(data)}{end}")
 modes = mode(data)
 for m in modes:
     output.write(f"Mode:{tab}{m}{end}")
+
 output.write(f"Median:{tab}{median(data)}{end}")
+
+max, min = maxmin(data)
+output.write(f"Max:{tab}{max}{end}")
+output.write(f"Min:{tab}{min}{end}")
 
 output.close()
 
