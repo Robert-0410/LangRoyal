@@ -1,5 +1,6 @@
 
 from typing import List
+from math import sqrt
 
 
 input = open(file="fastapi/output.log", mode = "r")
@@ -27,12 +28,24 @@ def mean(data: List[float]) -> float:
             sum = sum + v
             count = count + 1
     return (sum / count)
-# TODO: SD
+
+def sd(data: List[float]) -> float:
+    m = mean(data)
+    sum = 0
+    count = 0
+    for v in data:
+        if type(v) == float:
+            vm = v - m
+            sum = sum + (vm * vm)
+            count = count + 1
+    return sqrt(sum / (count -1))
+
 # TODO: Mode
 # TODO: Median
 # TODO: Max
 # TODO: Min
 
-output.write(f"Mean: {mean(data)}\n")
+output.write(f"Mean:\t{mean(data)}\n")
+output.write(f"SD:\t{sd(data)}\n")
 
 output.close()
