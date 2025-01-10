@@ -1,6 +1,6 @@
 
 from typing import List
-from math import sqrt, ceil, modf
+from math import sqrt, ceil
 
 tab = "\t"
 end = "\n"
@@ -70,7 +70,7 @@ def median(data: List[float]) -> float:
     values.sort()
 
     size = len(values)
-    # TODO: USE modf
+    # TODO: python has modf
     if size % 2 == 0:
         return (values[int(size / 2)] + values[int((size / 2) + 1)]) / 2
     else:
