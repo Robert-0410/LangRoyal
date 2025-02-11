@@ -1,4 +1,7 @@
 
-main.c:
-	gcc -c main.c -I server.h
+main:
+	gcc main.c server.c -I. -o run
+
+clean:
+	rm run
 
