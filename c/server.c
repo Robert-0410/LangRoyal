@@ -13,7 +13,7 @@ struct Server server_init(
         u_long interface,
         int port,
         int backlog,
-        void (*launch)(void)
+        void (*launch)(struct Server *server)
 ) {
         struct Server server;
         server.domain = domain;
