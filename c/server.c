@@ -28,7 +28,7 @@ struct Server server_init(
         server.address.sin_addr.s_addr = htonl(interface);
 
         server.socket = socket(domain, service, protocal);
-        if (server.socket == 0) {
+        if (server.socket < 0) {
                 perror("Failed to connect to socket.\n");
                 exit(1);
         }

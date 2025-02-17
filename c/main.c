@@ -9,7 +9,6 @@
 void launch(struct Server *server) {
         char buffer[1024];
         char *test_res = "Hello with C HTTP!";
-        /*int address_size = sizeof(server->address);*/
         uint64_t address_size = sizeof(server->address);
         int new_socket;
         while(1) {
@@ -20,12 +19,15 @@ void launch(struct Server *server) {
                         (struct sockaddr *) &server->address,
                         (socklen_t *) address_size
                 );
+                printf("Accepted new socket\n");
 
                 read(new_socket, buffer, 1024);
+                printf("Read from socket\n");
                 printf("%s\n", buffer);
 
                 /* Responce */
                 write(new_socket, test_res, strlen(test_res));
+                printf("Wrote to socket\n");
                 close(new_socket);
         }
 
